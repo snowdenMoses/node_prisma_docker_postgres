@@ -21,14 +21,14 @@ app.post('/', async (req, res) => {
     res.json(task)
 })
 
-// app.put('/publish/:id', async (req, res) => {
-//     const { id } = req.params
-//     const post = await prisma.post.update({
-//         where: { id },
-//         data: { published: true },
-//     })
-//     res.json(post)
-// })
+app.patch('/task/:id', async (req, res) => {
+    const { id } = req.params
+    const task = await prisma.task.update({
+        where: { id: parseInt(id) },
+        data: { title: req.body.title },
+    })
+    res.json(task)
+})
 
 // app.delete('/user/:id', async (req, res) => {
 //     const { id } = req.params
