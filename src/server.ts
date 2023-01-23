@@ -30,15 +30,15 @@ app.patch('/task/:id', async (req, res) => {
     res.json(task)
 })
 
-// app.delete('/user/:id', async (req, res) => {
-//     const { id } = req.params
-//     const user = await prisma.user.delete({
-//         where: {
-//             id,
-//         },
-//     })
-//     res.json(user)
-// })
+app.delete('/task/:id', async (req, res) => {
+    const { id } = req.params
+    const task = await prisma.task.delete({
+        where: {
+            id: parseInt(id)
+        },
+    })
+    res.json(task)
+})
 
 const server = app.listen(3000,()=>{
     console.log("Listening on port 3000")
