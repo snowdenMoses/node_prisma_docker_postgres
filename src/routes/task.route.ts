@@ -9,21 +9,12 @@ route.get('/', async (req, res) => {
 
 route.post('/', async (req, res) => {
     const { title, description } = req.body
-    const task = await prisma.task.create({
-        data: {
-            title,
-            description
-        }
-    })
+    
     res.json(task)
 })
 
 route.patch('/task/:id', async (req, res) => {
-    const { id } = req.params
-    const task = await prisma.task.update({
-        where: { id: parseInt(id) },
-        data: { title: req.body.title },
-    })
+    
     res.json(task)
 })
 
