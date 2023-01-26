@@ -16,11 +16,19 @@ class TaskService{
         })
     }
     public async updateTask(query: any, id: any) {
-        const { title } = query
+        const { title, description } = query
         const task = await this.prisma.task.update({
             where: { id: parseInt(id) },
-            data: { title },
+            data: { title, description },
+        })
+        return task
+    }
+    public async deleteTask(id: any) {
+        const task = await this.prisma.task.delete({
+            where: { id: parseInt(id) }
         })
         return task
     }
 }
+
+export default TaskService;
