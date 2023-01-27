@@ -1,32 +1,22 @@
-import express from "express";
-import { PrismaClient } from '@prisma/client';
-const prisma = new PrismaClient()
-const route = express.Router()
-route.get('/', async (req, res) => {
-    const tasks = await prisma.task.findMany()
-    res.json(tasks)
-})
+import { Router } from "express";
+import TaskController from '../controller/task.controller';
 
-route.post('/', async (req, res) => {
-    const { title, description } = req.body
-    
-    res.json(task)
-})
+// class TaskRouter {
+    const route = Router()
+    const taskController = new TaskController()
 
-route.patch('/task/:id', async (req, res) => {
-    
-    res.json(task)
-})
+//     constructor(){
+//         this.initializeRouter()
+//     }
 
-route.delete('/task/:id', async (req, res) => {
-    const { id } = req.params
-    const task = await prisma.task.delete({
-        where: {
-            id: parseInt(id)
-        },
-    })
-    res.json(task)
-})
+//     private initializeRouter(){
+        route.get('/', taskController.getAllTasks)
+        route.post('/', taskController.createTask)
+        route.patch('/task/:id', taskController.updateTask)
+        route.delete('/task/:id', taskController.deleteTask)
+//     }
+
+// }
 
 export default route
 

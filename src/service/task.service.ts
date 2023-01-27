@@ -1,13 +1,13 @@
 import { PrismaClient } from '@prisma/client';
 
-class TaskService{
+class TaskService {
     private prisma = new PrismaClient()
     
     public async getAllTasks (){
         const tasks = await this.prisma.task.findMany()
     }
-    public async createTask (query: any){
-        const { title, description} = query
+    public async createTask (payload: any){
+        const { title, description } = payload
         const task = await this.prisma.task.create({
             data: {
                 title,
@@ -15,8 +15,8 @@ class TaskService{
             }
         })
     }
-    public async updateTask(query: any, id: any) {
-        const { title, description } = query
+    public async updateTask(payload: any, id: any) {
+        const { title, description } = payload
         const task = await this.prisma.task.update({
             where: { id: parseInt(id) },
             data: { title, description },
