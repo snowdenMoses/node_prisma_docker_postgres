@@ -1,22 +1,22 @@
 import { Router } from "express";
 import TaskController from '../controller/task.controller';
 
-// class TaskRouter {
-    const route = Router()
-    const taskController = new TaskController()
+class TaskRouter {
+    private route = Router()
+    private taskController = new TaskController()
 
-//     constructor(){
-//         this.initializeRouter()
-//     }
+    constructor(){
+        this.initializeRouter()
+    }
 
-//     private initializeRouter(){
-        route.get('/', taskController.getAllTasks)
-        route.post('/', taskController.createTask)
-        route.patch('/task/:id', taskController.updateTask)
-        route.delete('/task/:id', taskController.deleteTask)
-//     }
+    private initializeRouter = () => {
+        this.route.get('/', this.taskController.getAllTasks)
+        this.route.post('/', this.taskController.createTask)
+        this.route.patch('/task/:id', this.taskController.updateTask)
+        this.route.delete('/task/:id', this.taskController.deleteTask)
+    }
 
-// }
+}
 
-export default route
+export default TaskRouter
 

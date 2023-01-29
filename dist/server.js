@@ -8,17 +8,27 @@ const express_1 = __importDefault(require("express"));
 const task_route_1 = __importDefault(require("./routes/task.route"));
 class App {
     constructor(route) {
-        this.app = (0, express_1.default)();
+        Object.defineProperty(this, "app", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: (0, express_1.default)()
+        });
+        Object.defineProperty(this, "initializeServer", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: (route) => {
+                this.app.use(express_1.default.json());
+                this.app.use("/", route);
+                this.app.listen(3002, () => {
+                    console.log("Listening on port 3002!");
+                });
+            }
+        });
         this.initializeServer(route);
     }
-    initializeServer(route) {
-        this.app.use(express_1.default.json());
-        this.app.use("/", route);
-        this.app.listen(3002, () => {
-            console.log("Listening on port 3002!");
-        });
-    }
 }
-// const route = new TaskRoute()
+const route = new task_route_1.default();
 // console.log(route)
-const server = new App(task_route_1.default);
+const server = new App(route);

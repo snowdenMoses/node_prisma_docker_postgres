@@ -1,28 +1,25 @@
 import { Request, Response, NextFunction } from 'express';
-import TaskService from '../service/task.service';
+import { TaskService } from '../service/task.service';
 
 class TaskController {
-    private taskService;
-    constructor() {
-        this.taskService = new TaskService()
-    }
+    private taskService = new TaskService()
 
-    public async getAllTasks(req: Request, res: Response) {
-        const tasks = this.taskService.getAllTasks()
+    public getAllTasks = async (req: Request, res: Response) => {
+        const tasks = await this.taskService.getAllTasks()
         res.json({ tasks: tasks })
     }
-    public async createTask(req: Request, res: Response) {
-        const task = this.taskService.createTask(req.body)
+    public createTask = async (req: Request, res: Response) => {
+        const task = await this.taskService.createTask(req.body)
         res.json({ task: task })
     }
-    public async updateTask(req: Request, res: Response) {
+    public updateTask = async (req: Request, res: Response) => {
         const { id } = req.params
-        const task = this.taskService.updateTask(req.body, id)
+        const task = await this.taskService.updateTask(req.body, id)
         res.json({ task: task })
     }
-    public async deleteTask(req: Request, res: Response) {
+    public deleteTask = async (req: Request, res: Response) => {
         const { id } = req.params
-        const task = this.taskService.deleteTask(id)
+        const task = await this.taskService.deleteTask(id)
         return task
     }
 }

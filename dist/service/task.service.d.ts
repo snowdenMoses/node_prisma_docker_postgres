@@ -1,8 +1,8 @@
 declare class TaskService {
     private prisma;
-    getAllTasks(): Promise<void>;
-    createTask(payload: any): Promise<void>;
+    getAllTasks(): Promise<import(".prisma/client").task[]>;
+    createTask(payload: any): Promise<import(".prisma/client").task>;
     updateTask(payload: any, id: any): Promise<import(".prisma/client").task>;
     deleteTask(id: any): Promise<import(".prisma/client").task>;
 }
-export default TaskService;
+export { TaskService };

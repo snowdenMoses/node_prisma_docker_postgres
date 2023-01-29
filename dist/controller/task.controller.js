@@ -1,30 +1,52 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const task_service_1 = __importDefault(require("../service/task.service"));
+const task_service_1 = require("../service/task.service");
 class TaskController {
     constructor() {
-        this.taskService = new task_service_1.default();
-    }
-    async getAllTasks(req, res) {
-        const tasks = this.taskService.getAllTasks();
-        res.json({ tasks: tasks });
-    }
-    async createTask(req, res) {
-        const task = this.taskService.createTask(req.body);
-        res.json({ task: task });
-    }
-    async updateTask(req, res) {
-        const { id } = req.params;
-        const task = this.taskService.updateTask(req.body, id);
-        res.json({ task: task });
-    }
-    async deleteTask(req, res) {
-        const { id } = req.params;
-        const task = this.taskService.deleteTask(id);
-        return task;
+        Object.defineProperty(this, "taskService", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: new task_service_1.TaskService()
+        });
+        Object.defineProperty(this, "getAllTasks", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: async (req, res) => {
+                const tasks = await this.taskService.getAllTasks();
+                res.json({ tasks: tasks });
+            }
+        });
+        Object.defineProperty(this, "createTask", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: async (req, res) => {
+                const task = await this.taskService.createTask(req.body);
+                res.json({ task: task });
+            }
+        });
+        Object.defineProperty(this, "updateTask", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: async (req, res) => {
+                const { id } = req.params;
+                const task = await this.taskService.updateTask(req.body, id);
+                res.json({ task: task });
+            }
+        });
+        Object.defineProperty(this, "deleteTask", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: async (req, res) => {
+                const { id } = req.params;
+                const task = await this.taskService.deleteTask(id);
+                return task;
+            }
+        });
     }
 }
 exports.default = TaskController;

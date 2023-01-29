@@ -8,7 +8,7 @@ class App {
         this.initializeServer(route)
     }
 
-    private initializeServer(route: any) {
+    private initializeServer = (route: any) => {
         this.app.use(express.json())
         this.app.use("/", route)
         this.app.listen(3002, () => {
@@ -18,6 +18,6 @@ class App {
 
 }
 
-// const route = new TaskRoute()
+const route = new TaskRoute()
 // console.log(route)
-const server = new App(TaskRoute)
+const server = new App(route)
