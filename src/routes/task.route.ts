@@ -10,10 +10,11 @@ class TaskRouter {
     }
 
     private initializeRouter = () => {
-        this.route.get('/', this.taskController.getAllTasks)
-        this.route.post('/', this.taskController.createTask)
-        this.route.patch('/task/:id', this.taskController.updateTask)
-        this.route.delete('/task/:id', this.taskController.deleteTask)
+        this.route.get('/', this.taskController.getAllTasks);
+        this.route.post('/', this.taskController.createTask);
+        this.route.patch('/task/:id', this.taskController.updateTask);
+        this.route.delete('/task/:id', this.taskController.deleteTask);
+        
     }
 
 }

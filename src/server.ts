@@ -1,6 +1,7 @@
 import express from 'express'
 // import { ITask } from "./interface/task.interface"
 import TaskRoute from "./routes/task.route";
+import { IRoute } from "./interface/route"
 
 class App {
     private app = express()
@@ -8,9 +9,9 @@ class App {
         this.initializeServer(route)
     }
 
-    private initializeServer = (route: any) => {
+    private initializeServer = (route: IRoute) => {
         this.app.use(express.json())
-        this.app.use("/", route)
+        this.app.use("/", route.route)
         this.app.listen(3002, () => {
             console.log("Listening on port 3002!")
         })
@@ -19,5 +20,4 @@ class App {
 }
 
 const route = new TaskRoute()
-// console.log(route)
 const server = new App(route)

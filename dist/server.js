@@ -20,7 +20,7 @@ class App {
             writable: true,
             value: (route) => {
                 this.app.use(express_1.default.json());
-                this.app.use("/", route);
+                this.app.use("/", route.route);
                 this.app.listen(3002, () => {
                     console.log("Listening on port 3002!");
                 });
@@ -30,5 +30,4 @@ class App {
     }
 }
 const route = new task_route_1.default();
-// console.log(route)
 const server = new App(route);
